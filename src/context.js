@@ -7,9 +7,9 @@ let api = "http://hn.algolia.com/api/v1/search?";
 
 const initialState = {
   isLoading: false,
-  query: "HTML",
+  query: "CSS",
   nbPages: 0,
-  page: 2,
+  page: 0,
   hits: [],
 };
 
