@@ -20,6 +20,13 @@ const reducer = (state, action) => {
           return currStory.objectID !== action.payload.storyID;
         }),
       };
+    case "search_story":
+      // const finalQuery=action.newQuery
+      // if(action.newQuery=="") finalQuery="technical"
+      return {
+        ...state,
+        query: action.newQuery,
+      };
     default:
       return state;
   }

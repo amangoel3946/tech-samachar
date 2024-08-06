@@ -7,7 +7,7 @@ let api = "http://hn.algolia.com/api/v1/search?";
 
 const initialState = {
   isLoading: false,
-  query: "CSS",
+  query: "technical",
   nbPages: 0,
   page: 0,
   hits: [],
@@ -50,12 +50,20 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const searchStory = (word) => {
+    word = word == "" ? "technical" : word;
+    dispatch({
+      type: "search_story",
+      newQuery: word,
+    });
+  };
+
   useEffect(() => {
     fetchAPIData(`${api}query=${state.query}&page=${state.page}`);
-  }, []);
+  }, [state.query]);
 
   return (
-    <AppContext.Provider value={{ ...state, removePost }}>
+    <AppContext.Provider value={{ ...state, removePost, searchStory }}>
       {children}
     </AppContext.Provider>
   );
