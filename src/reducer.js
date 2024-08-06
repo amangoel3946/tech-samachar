@@ -5,7 +5,8 @@ const reducer = (state, action) => {
     case "get_stories":
       return {
         ...state,
-        hits: action.payload.hits,
+        hits: action.hits,
+        nbPages: action.nbPages,
         isLoading: false,
       };
     case "set_loading":
@@ -21,11 +22,15 @@ const reducer = (state, action) => {
         }),
       };
     case "search_story":
-      // const finalQuery=action.newQuery
-      // if(action.newQuery=="") finalQuery="technical"
       return {
         ...state,
+        page: 0,
         query: action.newQuery,
+      };
+    case "change_page":
+      return {
+        ...state,
+        page: action.pg,
       };
     default:
       return state;

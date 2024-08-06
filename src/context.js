@@ -31,9 +31,8 @@ const AppProvider = ({ children }) => {
       console.log(data);
       dispatch({
         type: "get_stories",
-        payload: {
-          hits: data.hits,
-        },
+        hits: data.hits,
+        nbPages: data.nbPages,
       });
       //   isLoading = false;
     } catch (error) {
@@ -58,12 +57,30 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const previousPage = (pg) => {
+    pg = pg == 0 ? 0 : pg - 1;
+    dispatch({
+      type: "change_page",
+      pg: pg,
+    });
+  };
+
+  const nextPage = (pg) => {
+    pg = pg + 1 == state.nbPages ? 0 : pg + 1;
+    dispatch({
+      type: "change_page",
+      pg: pg,
+    });
+  };
+
   useEffect(() => {
     fetchAPIData(`${api}query=${state.query}&page=${state.page}`);
-  }, [state.query]);
+  }, [state.query, state.page]);
 
   return (
-    <AppContext.Provider value={{ ...state, removePost, searchStory }}>
+    <AppContext.Provider
+      value={{ ...state, removePost, searchStory, previousPage, nextPage }}
+    >
       {children}
     </AppContext.Provider>
   );
