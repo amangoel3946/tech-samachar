@@ -13,6 +13,13 @@ const reducer = (state, action) => {
         ...state,
         isLoading: true,
       };
+    case "remove_post":
+      return {
+        ...state,
+        hits: state.hits.filter((currStory) => {
+          return currStory.objectID !== action.payload.storyID;
+        }),
+      };
     default:
       return state;
   }
