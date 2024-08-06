@@ -3,7 +3,7 @@
 import React, { useContext, useReducer, useEffect } from "react";
 import reducer from "./reducer";
 
-let api = "http://hn.algolia.com/api/v1/search?";
+let api = "https://hn.algolia.com/api/v1/search?";
 
 const initialState = {
   isLoading: false,
@@ -50,7 +50,7 @@ const AppProvider = ({ children }) => {
   };
 
   const searchStory = (word) => {
-    word = word == "" ? "technical" : word;
+    word = word === "" ? "technical" : word;
     dispatch({
       type: "search_story",
       newQuery: word,
@@ -58,7 +58,7 @@ const AppProvider = ({ children }) => {
   };
 
   const previousPage = (pg) => {
-    pg = pg == 0 ? 0 : pg - 1;
+    pg = pg === 0 ? 0 : pg - 1;
     dispatch({
       type: "change_page",
       pg: pg,
@@ -66,7 +66,7 @@ const AppProvider = ({ children }) => {
   };
 
   const nextPage = (pg) => {
-    pg = pg + 1 == state.nbPages ? 0 : pg + 1;
+    pg = pg + 1 === state.nbPages ? 0 : pg + 1;
     dispatch({
       type: "change_page",
       pg: pg,

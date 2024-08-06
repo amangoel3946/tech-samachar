@@ -2,7 +2,7 @@ import React from "react";
 import { useGlobalContext } from "./context";
 
 const Stories = () => {
-  const { hits, nbPages, page, isLoading, removePost } = useGlobalContext();
+  const { hits, isLoading, removePost } = useGlobalContext();
 
   if (isLoading) {
     return (
@@ -24,7 +24,7 @@ const Stories = () => {
                 comments
               </p>
               <div className="card-button">
-                <a href={url} target="_blank">
+                <a href={url} target="_blank" rel="noopener noreferrer">
                   Read More
                 </a>
                 <a href="#" onClick={() => removePost(objectID)}>
